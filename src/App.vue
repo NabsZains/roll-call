@@ -41,12 +41,6 @@
       </v-btn>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn
-        icon
-        dark
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-      </v-btn>
     </v-toolbar>
     <main>
       <v-content>
@@ -54,7 +48,7 @@
           <v-slide-y-transition mode="out-in">
             <v-layout column align-center>
               <img src="/static/img/v.png" alt="Vuetify.js" class="mb-5">
-              <blockquote>
+              <blockquote v-if="student">
                 &#8220;First design the UI, then add functionality.&#8221;
                 <footer>
                   <small>
@@ -80,6 +74,7 @@
         clipped: false,
         drawer: true,
         fixed: false,
+        student: false,
         items: [
           { icon: 'bubble_chart', title: 'Inspire' }
         ],
