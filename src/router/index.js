@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Signin from '@/components/Auth/Signin'
 import Home from '@/components/Home'
 import CourseApproval from '@/components/Admin/CourseApproval'
 import SetRoles from '@/components/Admin/SetRoles'
@@ -20,6 +21,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/signin',
+      name: 'signin',
+      component: Signin
     },
     {
       path: '/admin',

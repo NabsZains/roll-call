@@ -12,7 +12,7 @@
         <v-list-tile
           v-for="item in items"
           v-if="checkRole(item.role)"
-          :key="item"
+          :key="item.title"
           router
           :to="item.link"
         >
@@ -61,20 +61,20 @@
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-menu
-          v-model="menu"
+          v-if="authenticated"
         >
           <v-btn dark slot="activator" flat>
             <v-icon left>account_circle</v-icon>
-            NabsZains
+            {{ username }}
           </v-btn>
           <v-card>
             <v-list>
               <v-list-tile avatar>
                 <v-list-tile-avatar>
-                  <img src="https://firebasestorage.googleapis.com/v0/b/amu-attendance-manager.appspot.com/o/images%2Fphoto562857341497750350.jpg?alt=media&token=4aa38292-28a5-4991-ad8b-0d5ca556f8d7" alt="John">
+                  <img :src="avatar" :alt="username">
                 </v-list-tile-avatar>
                 <v-list-tile-content>
-                  <v-list-tile-title>NabsZains</v-list-tile-title>
+                  <v-list-tile-title>{{ username }}</v-list-tile-title>
                   <v-list-tile-sub-title>Information Technology | Student</v-list-tile-sub-title>
                 </v-list-tile-content>
               </v-list-tile>
@@ -98,7 +98,7 @@
                 </v-list-tile-content>
               </v-list-tile>
               <v-divider></v-divider>
-              <v-list-tile>
+              <v-list-tile @click="logout">
                 <v-list-tile-action>
                   <v-icon>exit_to_app</v-icon>
                 </v-list-tile-action>
@@ -123,13 +123,14 @@
 </template>
 
 <script>
+  import Vuex from 'vuex'
+
   export default {
     data () {
       return {
         clipped: false,
         drawer: true,
         fixed: false,
-        menu: false,
         items: [
           { icon: 'event', title: 'Check Attendance', role: 'student', link: '/student/view_attendance' },
           { icon: 'playlist_add_check', title: 'Enroll in Courses', role: 'student', link: '/student/course_enrollment' },
@@ -147,6 +148,22 @@
         title: 'Roll-call'
       }
     },
+    computed: {
+      authenticated() {
+        return this.user !== null;
+      },
+      username() {
+        if (this.user)
+          return this.user.displayName;
+        return 'Unauthenticated'
+      },
+      avatar() {
+        if (this.user && this.user.photoURL)
+          return this.user.photoURL;
+        return 'https://zhcet-web-amu.firebaseapp.com/static/img/account.svg';
+      },
+      ...Vuex.mapGetters(['user'])
+    },
     methods: {
       checkRole(role) {
         switch(role) {
@@ -161,6 +178,9 @@
           default:
             return false;
         }
+      },
+      logout() {
+        this.$store.dispatch('logout');
       }
     }
   }
