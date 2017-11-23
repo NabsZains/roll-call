@@ -26,21 +26,37 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar dark class="primary" fixed app :clipped-left="clipped">
-      <v-toolbar-side-icon @click.stop="drawer = !drawer" dark></v-toolbar-side-icon>
-      <v-btn
-        icon
-        dark
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        dark
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>web</v-icon>
-      </v-btn>
+      <v-tooltip right>
+        <v-toolbar-side-icon
+          @click.stop="drawer = !drawer"
+          dark
+          slot="activator"
+        >
+        </v-toolbar-side-icon>
+        <span>Close Drawer</span>
+      </v-tooltip>
+      <v-tooltip right>
+        <v-btn
+          icon
+          dark
+          slot="activator"
+          @click.stop="miniVariant = !miniVariant"
+        >
+          <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
+        </v-btn>
+        <span>Minimize Drawer</span>
+      </v-tooltip>
+      <v-tooltip right>
+        <v-btn
+          icon
+          dark
+          slot="activator"
+          @click.stop="clipped = !clipped"
+        >
+          <v-icon>web</v-icon>
+        </v-btn>
+        <span>Expand Toolbar</span>
+      </v-tooltip>
       <router-link to="/" tag="span" style="cursor: pointer"><v-toolbar-title v-text="title"></v-toolbar-title></router-link>
       <v-spacer></v-spacer>
       <v-toolbar-items>
