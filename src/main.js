@@ -29,9 +29,9 @@ new Vue({
   created() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.$store.commit('setUser', user);
+        this.$store.commit('auth/setUser', user);
       } else {
-        this.$store.commit('clearUser');
+        this.$store.commit('auth/clearUser');
       }
     });
   }

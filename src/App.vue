@@ -60,55 +60,10 @@
       <router-link to="/" tag="span" style="cursor: pointer"><v-toolbar-title v-text="title"></v-toolbar-title></router-link>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-menu
-          v-if="authenticated"
-        >
-          <v-btn dark slot="activator" flat>
-            <v-icon left>account_circle</v-icon>
-            {{ username }}
-          </v-btn>
-          <v-card>
-            <v-list>
-              <v-list-tile avatar>
-                <v-list-tile-avatar>
-                  <img :src="avatar" :alt="username">
-                </v-list-tile-avatar>
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ username }}</v-list-tile-title>
-                  <v-list-tile-sub-title>Information Technology | Student</v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
-            </v-list>
-            <v-divider></v-divider>
-            <v-list>
-              <v-list-tile>
-                <v-list-tile-action>
-                  <v-icon>account_circle</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                  <v-list-tile-title>Profile</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-action>
-                  <v-icon>vpn_key</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                  <v-list-tile-title>Change Password</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
-              <v-divider></v-divider>
-              <v-list-tile @click="logout">
-                <v-list-tile-action>
-                  <v-icon>exit_to_app</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                  <v-list-tile-title>Sign Out</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
-            </v-list>
-          </v-card>
-        </v-menu>
+        <DropDown v-if="authenticated" />
+        <v-btn v-else flat :key="'signin'" :to="'/signin'">
+          <v-icon left>lock</v-icon>  Sign In
+        </v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <main>
@@ -123,9 +78,13 @@
 </template>
 
 <script>
-  import Vuex from 'vuex'
+  import DropDown from '@/components/User/DropDown'
+  import { mapGetters } from 'vuex'
 
   export default {
+    components: {
+      DropDown
+    },
     data () {
       return {
         clipped: false,
@@ -148,40 +107,6 @@
         title: 'Roll-call'
       }
     },
-    computed: {
-      authenticated() {
-        return this.user !== null;
-      },
-      username() {
-        if (this.user)
-          return this.user.displayName;
-        return 'Unauthenticated'
-      },
-      avatar() {
-        if (this.user && this.user.photoURL)
-          return this.user.photoURL;
-        return 'https://zhcet-web-amu.firebaseapp.com/static/img/account.svg';
-      },
-      ...Vuex.mapGetters(['user'])
-    },
-    methods: {
-      checkRole(role) {
-        switch(role) {
-          case "student":
-            return true;
-          case "faculty":
-            return false;
-          case "office":
-            return false;
-          case "admin":
-            return false;
-          default:
-            return false;
-        }
-      },
-      logout() {
-        this.$store.dispatch('logout');
-      }
-    }
+    computed: mapGetters('auth', ['user', 'authenticated', 'avatar', 'username', 'checkRole'])
   }
 </script>
