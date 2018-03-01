@@ -2,7 +2,7 @@
   <v-data-table
     v-bind:headers="headers"
     :items="items"
-    class="elevation-9"
+    class="elevation-1"
     hide-actions
     light
     expand="true"
@@ -12,7 +12,7 @@
       <td class="text-xs-right">{{ props.item.attended }}</td>
       <td class="text-xs-right">{{ props.item.delivered }}</td>
       <td class="text-xs-right">{{ props.item.percentage }}</td>
-      <td class="text-xs-right">{{ props.item.updatedon }}</td>
+      <td class="text-xs-right">{{ props.item.updatedOn }}</td>
     </template>
   </v-data-table>
 </template>
@@ -25,13 +25,12 @@
           {
             text: 'Subject (Subject Code)',
             align: 'left',
-            sortable: false,
             value: 'name'
           },
-          { text: 'Attended', value: 'Attended' },
-          { text: 'Delivered', value: 'Delivered' },
-          { text: 'Percentage %', value: 'Percentage %' },
-          { text: 'Updated on', value: 'Updated on' },
+          { text: 'Attended', value: 'attended' },
+          { text: 'Delivered', value: 'delivered' },
+          { text: 'Percentage %', value: 'percentage' },
+          { text: 'Updated on', value: 'updatedOn' },
         ],
         items: [
           {
@@ -40,7 +39,7 @@
             attended: 16,
             delivered: 20,
             percentage: 80,
-            updatedon: '11:50 am, 1.12.2017',
+            updatedOn: '11:50 am, 1.12.2017',
           },
           {
             value: false,
@@ -48,7 +47,7 @@
             attended: 15,
             delivered: 20,
             percentage: 65,
-            updatedon: '11:50 am, 1.12.2017',
+            updatedOn: '11:50 am, 1.12.2017',
           },
           {
             value: false,
@@ -56,7 +55,7 @@
             attended: 18,
             delivered: 20,
             percentage: 85,
-            updatedon: '11:50 am, 1.12.2017',
+            updatedOn: '11:50 am, 1.12.2017',
           },
           {
             value: false,
@@ -64,7 +63,7 @@
             attended: 19,
             delivered: 20,
             percentage: 95,
-            updatedon: '11:50 am, 1.12.2017',
+            updatedOn: '11:50 am, 1.12.2017',
           },
           {
             value: false,
@@ -72,7 +71,7 @@
             attended: 17,
             delivered: 20,
             percentage: 75,
-            updatedon: '11:50 am, 1.12.2017',
+            updatedOn: '11:50 am, 1.12.2017',
           },
           {
             value: false,
@@ -80,7 +79,7 @@
             attended: 16,
             delivered: 20,
             percentage: 70,
-            updatedon: '11:50 am, 1.12.2017',
+            updatedOn: '11:50 am, 1.12.2017',
           },
           {
             value: false,
@@ -88,7 +87,7 @@
             attended: 12,
             delivered: 20,
             percentage: 67,
-            updatedon: '11:50 am, 1.12.2017',
+            updatedOn: '11:50 am, 1.12.2017',
           },
         ]
       }
