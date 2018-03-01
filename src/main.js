@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import './stylus/main.styl'
+import colors from 'vuetify/es5/util/colors'
 
 import VueHead from 'vue-head'
 
@@ -16,7 +17,11 @@ import { store } from './store'
 
 import config from './config'
 
-Vue.use(Vuetify);
+Vue.use(Vuetify, {
+  theme: {
+    primary: colors.purple.darken1
+  }
+});
 Vue.use(VueHead);
 sync(store, router);
 Vue.config.productionTip = false;

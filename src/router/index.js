@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Signin from '@/components/Auth/Signin'
 import Home from '@/components/Home'
+import Profile from '@/components/User/Profile'
 import CourseApproval from '@/components/Admin/CourseApproval'
 import SetRoles from '@/components/Admin/SetRoles'
 import CourseIncharge from '@/components/Faculty/CourseIncharge'
@@ -26,6 +27,11 @@ export default new Router({
       path: '/signin',
       name: 'Signin',
       component: Signin
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile
     },
     {
       path: '/admin',

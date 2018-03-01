@@ -4597,9 +4597,9 @@ vue@^2.3.3:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.2.tgz#fd367a87bae7535e47f9dc5c9ec3b496e5feb5a4"
 
-vuetify@^0.16.9:
-  version "0.16.9"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-0.16.9.tgz#fd61f219e4a40d7afe5e24a803df5658a40b38e4"
+vuetify@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.0.4.tgz#ef712e4ccd231d0d3678da31047d338d94e7f20d"
 
 vuex-router-sync@^5.0.0:
   version "5.0.0"

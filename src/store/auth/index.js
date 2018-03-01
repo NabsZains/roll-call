@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { auth } from 'firebase'
 import { firebaseAction } from 'vuexfire'
 

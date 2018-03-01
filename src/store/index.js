@@ -5,11 +5,12 @@ import { firebaseMutations, firebaseAction } from 'vuexfire'
 import { db } from '@/store/utils/firestore'
 
 import auth from './auth'
+import user from './user'
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  modules: { auth },
+  modules: { auth, user },
   state: {
     departments: []
   },

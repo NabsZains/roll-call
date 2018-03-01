@@ -28,7 +28,7 @@
       </v-list>
       <v-divider></v-divider>
       <v-list>
-        <v-list-tile>
+        <v-list-tile :to="'/profile'">
           <v-list-tile-action>
             <v-icon>account_circle</v-icon>
           </v-list-tile-action>
