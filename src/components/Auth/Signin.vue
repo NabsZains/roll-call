@@ -34,6 +34,13 @@
         this.$store.dispatch('logout')
       }
     },
+    head() {
+      return {
+        title: {
+          inner: this.$route.name
+        }
+      }
+    },
     mounted () {
       const uiConfig = {
         signInSuccessUrl: '/',

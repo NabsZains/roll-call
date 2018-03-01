@@ -107,6 +107,13 @@
         title: 'Roll-call'
       }
     },
-    computed: mapGetters('auth', ['user', 'authenticated', 'avatar', 'username', 'checkRole'])
+    computed: mapGetters('auth', ['user', 'authenticated', 'avatar', 'username', 'checkRole']),
+    head() {
+      return {
+        title: {
+          inner: this.$route.name
+        }
+      }
+    }
   }
 </script>

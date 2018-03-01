@@ -19,82 +19,82 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       component: Home
     },
     {
       path: '/signin',
-      name: 'signin',
+      name: 'Signin',
       component: Signin
     },
     {
       path: '/admin',
-      name: 'admin_panel',
+      name: 'Admin Panel',
       component: SetRoles
     },
     {
       path: '/admin/set_roles',
-      name: 'set_roles',
+      name: 'Role Management',
       component: SetRoles
     },
     {
       path: '/admin/approve_courses',
-      name: 'approve_courses',
+      name: 'Approve Courses',
       component: CourseApproval
     },
     {
       path: '/faculty',
-      name: 'faculty_panel',
+      name: 'Faculty Panel',
       component: MarkAttendance
     },
     {
       path: '/faculty/mark_attendance',
-      name: 'mark_attendance',
+      name: 'Mark Attendance',
       component: MarkAttendance
     },
     {
       path: '/faculty/course_in_charge',
-      name: 'course_in_charge',
+      name: 'Course In Charge',
       component: CourseIncharge
     },
     {
       path: '/faculty/faculty_registration',
-      name: 'faculty_registration',
+      name: 'Faculty Registration',
       component: FacultyRegistration
     },
     {
       path: '/office',
-      name: 'office_panel',
+      name: 'Office Panel',
       component: FacultyVerification
     },
     {
       path: '/office/faculty_verification',
-      name: 'faculty_verification',
+      name: 'Faculty Verification',
       component: FacultyVerification
     },
     {
       path: '/office/course_management',
-      name: 'course_management',
+      name: 'Course Management',
       component: CourseManagement
     },
     {
       path: '/office/roll_list_management',
-      name: 'roll_list_management',
+      name: 'Roll List Management',
       component: RolllistManagement
     },
     {
       path: '/student',
-      name: 'student_panel',
+      name: 'Student Panel',
       component: ViewAttendance
     },
     {
       path: '/student/view_attendance',
-      name: 'view_attendance',
+      name: 'View Attendance',
       component: ViewAttendance
     },
     {
       path: '/student/course_enrollment',
-      name: 'course_enrollment',
+      name: 'Course Enrolment',
       component: CourseEnrollment
     },
   ],
