@@ -1,14 +1,15 @@
 <template>
   <v-container>
-    <v-layout row v-if="user">
+    <v-layout row v-if="authenticated">
       <v-flex xs12 sm8 lg6 xl4 offset-sm2 offset-lg3 offset-xl4>
         <v-card class="text-xs-center">
           <div class="display-1 pt-3">You are already logged in!</div>
+          <v-btn class="my-5" info large :to="'/'">Home</v-btn>
           <v-btn class="my-5" error large @click="logout">Logout</v-btn>
         </v-card>
       </v-flex>
     </v-layout>
-    <v-layout row v-show="!user">
+    <v-layout row v-show="!authenticated">
       <v-flex xs12 sm8 lg6 xl4 offset-sm2 offset-lg3 offset-xl4>
         <v-card>
           <div class="display-1 text-xs-center pt-3">Sign In or Register</div>
@@ -27,7 +28,7 @@
 
   export default {
     name: 'auth',
-    computed: Vuex.mapGetters(['user']),
+    computed: Vuex.mapGetters('auth', ['authenticated']),
     methods: {
       logout () {
         this.$store.dispatch('logout')

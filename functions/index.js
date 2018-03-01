@@ -5,14 +5,15 @@ admin.initializeApp(functions.config().firebase);
 
 exports.createNewUser = functions.auth.user().onCreate(event => {
     const user = event.data;
-    console.log('Creating data for user', user);
     const userData = {
         id: user.uid,
-        name: user.displayName,
-        email: user.email,
-        avatar: user.photoURL,
-        phoneNumber: user.phoneNumber
+        name: user.displayName || null,
+        email: user.email || null,
+        avatar: user.photoURL || null,
+        phoneNumber: user.phoneNumber || null
     };
+
+    console.log('Creating data for user', userData);
 
     const firestore = admin.firestore();
     return firestore.collection('users').doc(user.uid).set(userData);

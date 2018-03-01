@@ -1,8 +1,18 @@
 <template>
-  <v-menu>
+  <v-menu
+    offset-y
+    :close-on-content-click="false"
+    v-model="dropdown">
     <v-btn dark slot="activator" flat>
-      <v-icon left>account_circle</v-icon>
-      {{ username }}
+      <v-avatar
+        size="36px"
+        class="mr-2"
+        grey
+        lighten-4>
+        <img :src="avatar" alt="Avatar">
+      </v-avatar>
+      <span class="not-caps">{{ username }}</span>
+      <v-icon>{{ dropdownIcon }}</v-icon>
     </v-btn>
     <v-card>
       <v-list>
@@ -12,7 +22,7 @@
           </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>{{ username }}</v-list-tile-title>
-            <v-list-tile-sub-title>Information Technology | Student</v-list-tile-sub-title>
+            <v-list-tile-sub-title>{{ designation }}</v-list-tile-sub-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -49,10 +59,26 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
 
-export default {
-  computed: mapGetters('auth', 'username'),
-  methods: mapActions('auth', 'logout')
-}
+  export default {
+    data() {
+      return {
+        dropdown: false
+      }
+    },
+    computed: {
+      dropdownIcon () {
+        return this.dropdown ? 'keyboard_arrow_up' : 'keyboard_arrow_down'
+      },
+      ...mapGetters('auth', ['username', 'avatar', 'designation'])
+    },
+    methods: mapActions('auth', ['logout'])
+  }
 </script>
+
+<style scoped>
+  .not-caps {
+    text-transform: none;
+  }
+</style>
