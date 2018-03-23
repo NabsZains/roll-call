@@ -2,21 +2,14 @@ import { firebaseAction } from 'vuexfire'
 
 import { db } from '@/store/utils/firestore'
 
-window.db = db;
-
 export default {
   namespaced: true,
-  getters: {
-
-  },
-  mutations: {
-    
-  },
   actions: {
     setDepartment(_, { userId, departmentCode }) {
       return db().collection('users')
         .doc(userId)
         .update({
+          pending: true,
           pendingDepartment: db().collection('departments').doc(departmentCode)
         });
     },
@@ -24,6 +17,7 @@ export default {
       return db().collection('users')
         .doc(userId)
         .update({
+          pending: true,
           pendingRoles: roles
         });
     }

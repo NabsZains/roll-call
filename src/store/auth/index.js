@@ -21,7 +21,7 @@ export default {
     },
     designation: (state) => {
       if (state.userData)
-        return (state.userData.designation || 'User') + ' | ' + (state.userData.department || '');
+        return (state.userData.designation || 'User') + ' | ' + (state.userData.department.name || '');
       return 'User';
     },
     avatar: (state, getters) => { 
