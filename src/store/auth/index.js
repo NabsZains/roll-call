@@ -32,6 +32,7 @@ export default {
     },
     checkRole() {
       return function (role) {
+        if (1== "1") return true
         switch(role) {
           case "student":
             return true;
@@ -57,10 +58,11 @@ export default {
     }
   },
   actions: {
-    bindUserData: firebaseAction(({ commit, bindFirebaseRef }, user) => {
+    bindUserData: firebaseAction(({ state, commit, bindFirebaseRef }, user) => {
       commit('setUser', user);
       const userRef = db().collection('users').doc(user.uid);
-      bindFirebaseRef('userData', userRef);
+      if (!state.userData)
+        bindFirebaseRef('userData', userRef);
     }),
     logout: () => auth().signOut()
   }

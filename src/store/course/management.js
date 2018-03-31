@@ -8,10 +8,11 @@ export default {
     courses: []
   },
   actions: {
-    bindCourses: firebaseAction(({ bindFirebaseRef }, departmentId) => {
+    bindCourses: firebaseAction(({ state, bindFirebaseRef }, departmentId) => {
       if (!departmentId)
         return
-      bindFirebaseRef('courses', db().collection('courses').where('departmentCode', '==', departmentId))
+      if (!state.courses.length)
+        bindFirebaseRef('courses', db().collection('courses').where('departmentCode', '==', departmentId))
     }),
 
     addCourse: (_, course) => {

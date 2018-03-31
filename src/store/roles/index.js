@@ -15,8 +15,9 @@ export default {
     
   },
   actions: {
-    bindPending: firebaseAction(({ bindFirebaseRef }) => {
-      bindFirebaseRef('pending', db().collection('users').where('pending', '==', true))
+    bindPending: firebaseAction(({ state, bindFirebaseRef }) => {
+      if (!state.pending.length)
+        bindFirebaseRef('pending', db().collection('users').where('pending', '==', true))
     }),
 
     approve: (_, user) => {

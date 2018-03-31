@@ -70,17 +70,21 @@
 
             // Show snackbar
           })
+      },
+
+      initialize (department) {
+        if (department) {
+          this.loaded = true
+          this.bindCourses(department.code)
+        }
       }
     },
     created () {
-      this.bindCourses()
+      this.initialize(this.userDepartment)
     },
     watch: {
       userDepartment (newVal, oldVal) {
-        if (newVal) {
-          this.loaded = true
-          this.bindCourses(newVal.code)
-        }
+        this.initialize(newVal)
       }
     },
     head: {
