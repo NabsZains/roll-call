@@ -11,6 +11,7 @@ export default {
   },
   getters: {
     user: state => state.user,
+    userDepartment: state => (state.userData || {}).department,
     authenticated: state => {
       return state.user !== null;
     },

@@ -7,11 +7,12 @@ import { db } from '@/store/utils/firestore'
 import auth from './auth'
 import user from './user'
 import roles from './roles'
+import coursemanagement from './coursemanagement'
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  modules: { auth, user, roles },
+  modules: { auth, user, roles, coursemanagement },
   state: {
     departments: []
   },
