@@ -7,7 +7,7 @@
       <v-flex v-for="user in pendingUsers" :key="user.id">
         <v-card>
           <v-card-title>
-            <h4>{{user.name}}</h4>
+            <h4 class="headline mb-0">{{user.name}}</h4>
           </v-card-title>
           <v-card-text>
             <p>{{user.email}}</p>
@@ -19,7 +19,7 @@
             </div>
           </v-card-text>
           <v-card-actions>
-            <v-btn flat color="green">Approve</v-btn>
+            <v-btn flat color="green" @click="approve(user)">Approve</v-btn>
           </v-card-actions>
         </v-card>
         <br>
@@ -37,7 +37,7 @@
       ...mapGetters('roles', ['pendingUsers'])
     },
     methods: {
-      ...mapActions('roles', ['bindPending'])
+      ...mapActions('roles', ['bindPending', 'approve'])
     },
     created () {
       this.bindPending()

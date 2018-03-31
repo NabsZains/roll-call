@@ -17,6 +17,21 @@ export default {
   actions: {
     bindPending: firebaseAction(({ bindFirebaseRef }) => {
       bindFirebaseRef('pending', db().collection('users').where('pending', '==', true))
-    })
+    }),
+
+    approve: (_, user) => {
+      const newRoles = (user.roles || []).concat(user.pendingRoles || [])
+
+      const payload = {
+        roles: newRoles,
+        pendingRoles: null,
+        pending: false
+      }
+
+      return db()
+        .collection('users')
+        .doc(user.id)
+        .update(payload)
+    }
   }
 }
