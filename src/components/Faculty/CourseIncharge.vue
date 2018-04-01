@@ -11,9 +11,11 @@
           <v-card-text>
             <p>{{course.title}}</p>
           </v-card-text>
-          <v-card-actions v-if="!isPending(course.code)">
+          <v-card-actions v-if="!isPending(course.code) && !isApproved(course.code)">
             <v-btn flat color="green" @click="request(course)">Request</v-btn>
           </v-card-actions>
+          <v-card-text v-else-if="isPending(course.code)">Pending</v-card-text>
+          <v-card-text v-else-if="isApproved(course.code)">Approved</v-card-text>
           <v-card-text v-else>Pending</v-card-text>
         </v-card>
         <br>
@@ -29,12 +31,12 @@
   export default {
     computed: {
       ...mapState('coursemanagement', ['courses']),
-      ...mapState('courseregistration', ['pendingCourses']),
+      ...mapState('courseregistration', ['pendingCourses', 'facultyCourses']),
       ...mapGetters('auth', ['userDepartment', 'user'])
     },
     methods: {
       ...mapActions('coursemanagement', ['bindCourses']),
-      ...mapActions('courseregistration', ['bindPendingCourses', 'addPendingCourse']),
+      ...mapActions('courseregistration', ['bindPendingCourses', 'bindFacultyCourses', 'addPendingCourse']),
       request (course) {
         const userId = this.user.uid;
         this.addPendingCourse({
@@ -55,10 +57,19 @@
         return false
       },
 
+      isApproved (courseId) {
+        for (let course of this.facultyCourses) {
+          if (course.courseId === courseId)
+            return true
+        }
+        return false
+      },
+
       initialize (department) {
         if (department) {
           this.bindCourses(department.code)
           this.bindPendingCourses(this.user.uid)
+          this.bindFacultyCourses(this.user.uid)
         }
       }
     },

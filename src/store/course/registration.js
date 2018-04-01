@@ -33,18 +33,18 @@ export default {
       }
     }),
 
-    bindFacultyCourses: firebaseAction(({ bindFirebaseRef }, userId) => {
+    bindFacultyCourses: firebaseAction(({ state, bindFirebaseRef }, userId) => {
       if (!userId)
         return
       if (!state.facultyCourses.length)
         bindFirebaseRef('facultyCourses', db().collection('faculty_courses').where('userId', '==', userId))
     }),
 
-    bindStudentCourses: firebaseAction(({ bindFirebaseRef }, userId) => {
+    bindStudentCourses: firebaseAction(({ state, bindFirebaseRef }, userId) => {
       if (!userId)
         return
       if (!state.studentCourses.length)
-        bindFirebaseRef('studentCourses', db().collection('attendance').where('studentId', '==', userId))
+        bindFirebaseRef('studentCourses', db().collection('attendance').where('userId', '==', userId))
     }),
 
     addCourse: (_, { root, courseId, userId }) => {
@@ -81,7 +81,7 @@ export default {
 
     addFacultyCourse: ({ dispatch }, payload) => {
       return dispatch('addCourse', {
-        root: 'faculty_course',
+        root: 'faculty_courses',
         ...payload
       })
     },

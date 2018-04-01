@@ -11,10 +11,11 @@
           <v-card-text>
             <p>{{course.title}}</p>
           </v-card-text>
-          <v-card-actions v-if="!isPending(course.code)">
+          <v-card-actions v-if="!isPending(course.code) && !isApproved(course.code)">
             <v-btn flat color="green" @click="request(course)">Request</v-btn>
           </v-card-actions>
-          <v-card-text v-else>Pending</v-card-text>
+          <v-card-text v-else-if="isPending(course.code)">Pending</v-card-text>
+          <v-card-text v-else-if="isApproved(course.code)">Approved</v-card-text>
         </v-card>
         <br>
       </v-flex>
@@ -29,12 +30,12 @@
   export default {
     computed: {
       ...mapState('coursemanagement', ['courses']),
-      ...mapState('courseregistration', ['registeredCourses']),
+      ...mapState('courseregistration', ['registeredCourses', 'studentCourses']),
       ...mapGetters('auth', ['userDepartment', 'user'])
     },
     methods: {
       ...mapActions('coursemanagement', ['bindCourses']),
-      ...mapActions('courseregistration', ['bindRegisteredCourses', 'addRegisteredCourse']),
+      ...mapActions('courseregistration', ['bindRegisteredCourses', 'bindStudentCourses', 'addRegisteredCourse']),
       request (course) {
         const userId = this.user.uid;
         this.addRegisteredCourse({
@@ -55,10 +56,19 @@
         return false
       },
 
+      isApproved (courseId) {
+        for (let course of this.studentCourses) {
+          if (course.courseId === courseId)
+            return true
+        }
+        return false
+      },
+
       initialize (department) {
         if (department) {
           this.bindCourses(department.code)
           this.bindRegisteredCourses(this.user.uid)
+          this.bindStudentCourses(this.user.uid)
         }
       }
     },
