@@ -8,13 +8,14 @@ import auth from './auth'
 import user from './user'
 import roles from './roles'
 import attendance from './attendance'
+import markattendance from './attendance/mark'
 import course from './course'
 import courseregistration from './course/registration'
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  modules: { auth, user, roles, course, courseregistration, attendance },
+  modules: { auth, user, roles, course, courseregistration, attendance, markattendance },
   state: {
     departments: []
   },

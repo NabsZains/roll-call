@@ -10,7 +10,7 @@
           </v-card-title>
           <v-card-text v-if="att.course">
             <p>{{att.course.title}}</p>
-            <p>{{att.attended}} / {{att.delivered}}</p>
+            <p>{{att.attended}} / {{att.course.delivered || 0}}</p>
             <p>{{att | percentage }}</p>
           </v-card-text>
         </v-card>
@@ -40,8 +40,8 @@
     filters: {
       percentage (attendance) {
         let percentage = 0
-        if (attendance.delivered)
-          percentage = attendance.attended/attendance.delivered * 100
+        if (attendance.course && attendance.course.delivered)
+          percentage = attendance.attended/attendance.course.delivered * 100
         return percentage + '%'
       }
     },

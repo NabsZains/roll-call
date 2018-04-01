@@ -8,6 +8,7 @@ import SetRoles from '@/components/Admin/SetRoles'
 import CourseIncharge from '@/components/Faculty/CourseIncharge'
 import FacultyRegistration from '@/components/Faculty/FacultyRegistration'
 import MarkAttendance from '@/components/Faculty/MarkAttendance'
+import AttendancePage from '@/components/Faculty/AttendancePage'
 import CourseManagement from '@/components/Office/CourseManagement'
 import FacultyVerification from '@/components/Office/FacultyVerification'
 import RolllistManagement from '@/components/Office/RolllistManagement'
@@ -57,6 +58,11 @@ export default new Router({
       path: '/faculty/mark_attendance',
       name: 'Mark Attendance',
       component: MarkAttendance
+    },
+    {
+      path: '/faculty/attendance/:course',
+      name: 'Attendance Page',
+      component: AttendancePage
     },
     {
       path: '/faculty/course_in_charge',

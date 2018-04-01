@@ -13,8 +13,7 @@ export default {
         .map(item => {
           return {
             ...item,
-            attended: item.attended || 0,
-            delivered: item.delivered || 0
+            attended: item.attended || 0
           }
         })
     }
