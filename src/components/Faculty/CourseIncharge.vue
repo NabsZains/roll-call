@@ -38,12 +38,12 @@
     },
     computed: {
       ...mapState('coursemanagement', ['courses']),
-      ...mapState('courseregistration', ['pendingCourses', 'facultyCourses']),
+      ...mapState('courseregistration', ['pendingCourses']),
       ...mapGetters('auth', ['userDepartment', 'user'])
     },
     methods: {
       ...mapActions('coursemanagement', ['bindCourses']),
-      ...mapActions('courseregistration', ['bindPendingCourses', 'bindFacultyCourses', 'addPendingCourse']),
+      ...mapActions('courseregistration', ['bindPendingCourses', 'addPendingCourse']),
       request (course) {
         const userId = this.user.uid;
         this.addPendingCourse({

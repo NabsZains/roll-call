@@ -40,7 +40,6 @@ export default {
     }),
 
     addCourse: (_, { root, courseId, userId }) => {
-      console.log(root)
       const courseRef = db().collection('courses').doc(courseId)
       const userRef = db().collection('users').doc(userId)
 
@@ -65,9 +64,9 @@ export default {
       })
     },
 
-    addRegisterCourse: ({ dispatch }, payload) => {
+    addRegisteredCourse: ({ dispatch }, payload) => {
       return dispatch('addCourse', {
-        root: 'register_courses',
+        root: 'registered_courses',
         ...payload
       })
     },
