@@ -32,13 +32,11 @@
       ...mapGetters('auth', ['userDepartment'])
     },
     methods: {
-      ...mapActions('courseregistration', ['bindRegisteredCourses', 'addRegisteredCourse', 
-      'deleteRegisteredCourse', 'addStudentCourse']),
+      ...mapActions('courseregistration', ['bindRegisteredCourses', 'deleteRegisteredCourse', 'addStudentCourse']),
       request (course) {
         this.deleteRegisteredCourse(course)
         .then(() => this.addStudentCourse(course))
         .then(() => {
-          console.log('lol')
           // Show snackbar
         }).catch(error => {
           console.log(error)

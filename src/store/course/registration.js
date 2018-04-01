@@ -6,6 +6,7 @@ export default {
   namespaced: true,
   state: {
     pendingCourses: [],
+    allPendingCourses: [],
     registeredCourses: [],
     allRegisteredCourses: [],
     facultyCourses: [],
@@ -13,10 +14,13 @@ export default {
   },
   actions: {
     bindPendingCourses: firebaseAction(({ state, bindFirebaseRef }, userId) => {
-      if (!userId)
-        return
-      if (!state.pendingCourses.length)
-        bindFirebaseRef('pendingCourses', db().collection('pending_courses').where('userId', '==', userId))
+      if (userId) {
+        if (!state.pendingCourses.length)
+          bindFirebaseRef('pendingCourses', db().collection('pending_courses').where('userId', '==', userId))
+      } else {
+        if (!state.allPendingCourses.length)
+          bindFirebaseRef('allPendingCourses', db().collection('pending_courses'))
+      }
     }),
 
     bindRegisteredCourses: firebaseAction(({ state, bindFirebaseRef }, userId) => {
