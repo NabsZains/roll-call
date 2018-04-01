@@ -7,6 +7,7 @@ export default {
   state: {
     pendingCourses: [],
     registeredCourses: [],
+    allRegisteredCourses: [],
     facultyCourses: [],
     studentCourses: []
   },
@@ -19,10 +20,13 @@ export default {
     }),
 
     bindRegisteredCourses: firebaseAction(({ state, bindFirebaseRef }, userId) => {
-      if (!userId)
-        return
-      if (!state.registeredCourses.length)
-        bindFirebaseRef('registeredCourses', db().collection('registered_courses').where('userId', '==', userId))
+      if (userId) {
+        if (!state.registeredCourses.length)
+          bindFirebaseRef('registeredCourses', db().collection('registered_courses').where('userId', '==', userId))
+      } else {
+        if (!state.allRegisteredCourses.length)
+          bindFirebaseRef('allRegisteredCourses', db().collection('registered_courses'))
+      }
     }),
 
     bindFacultyCourses: firebaseAction(({ bindFirebaseRef }, userId) => {
@@ -92,9 +96,9 @@ export default {
         .delete()
     },
 
-    deleteRegisterCourse: (_, pendingCourse) => {
+    deleteRegisteredCourse: (_, pendingCourse) => {
       return db()
-        .collection('register_courses')
+        .collection('registered_courses')
         .doc(pendingCourse.id)
         .delete()
     }

@@ -27,15 +27,6 @@
   import { mapState, mapGetters, mapActions } from 'vuex'
 
   export default {
-    data () {
-      return {
-        course: {
-          code: '',
-          title: ''
-        },
-        loaded: false
-      }
-    },
     computed: {
       ...mapState('coursemanagement', ['courses']),
       ...mapState('courseregistration', ['registeredCourses']),
@@ -66,7 +57,6 @@
 
       initialize (department) {
         if (department) {
-          this.loaded = true
           this.bindCourses(department.code)
           this.bindRegisteredCourses(this.user.uid)
         }
