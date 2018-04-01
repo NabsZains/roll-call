@@ -54,11 +54,11 @@
       }
     },
     computed: {
-      ...mapState('coursemanagement', ['courses']),
+      ...mapState('course', ['courses']),
       ...mapGetters('auth', ['userDepartment'])
     },
     methods: {
-      ...mapActions('coursemanagement', ['bindCourses', 'addCourse', 'deleteCourse']),
+      ...mapActions('course', ['bindCourses', 'addCourse', 'deleteCourse']),
       submit () {
         this.course.departmentCode = this.userDepartment.code
         this.addCourse(this.course)

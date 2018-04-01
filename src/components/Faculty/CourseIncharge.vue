@@ -30,12 +30,12 @@
 
   export default {
     computed: {
-      ...mapState('coursemanagement', ['courses']),
+      ...mapState('course', ['courses']),
       ...mapState('courseregistration', ['pendingCourses', 'facultyCourses']),
       ...mapGetters('auth', ['userDepartment', 'user'])
     },
     methods: {
-      ...mapActions('coursemanagement', ['bindCourses']),
+      ...mapActions('course', ['bindCourses']),
       ...mapActions('courseregistration', ['bindPendingCourses', 'bindFacultyCourses', 'addPendingCourse']),
       request (course) {
         const userId = this.user.uid;
@@ -65,20 +65,29 @@
         return false
       },
 
-      initialize (department) {
+      initializeDept (department) {
         if (department) {
           this.bindCourses(department.code)
-          this.bindPendingCourses(this.user.uid)
-          this.bindFacultyCourses(this.user.uid)
+        }
+      },
+
+      initializeUser (user) {
+        if (user) {
+          this.bindPendingCourses(user.uid)
+          this.bindFacultyCourses(user.uid)
         }
       }
     },
     created () {
-      this.initialize(this.userDepartment)
+      this.initializeDept(this.userDepartment)
+      this.initializeUser(this.user)
     },
     watch: {
       userDepartment (newVal, oldVal) {
-        this.initialize(newVal)
+        this.initializeDept(newVal)
+      },
+      user (newVal, oldVal) {
+        this.initializeUser(newVal)
       }
     },
     head: {

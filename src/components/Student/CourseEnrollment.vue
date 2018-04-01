@@ -29,12 +29,12 @@
 
   export default {
     computed: {
-      ...mapState('coursemanagement', ['courses']),
+      ...mapState('course', ['courses']),
       ...mapState('courseregistration', ['registeredCourses', 'studentCourses']),
       ...mapGetters('auth', ['userDepartment', 'user'])
     },
     methods: {
-      ...mapActions('coursemanagement', ['bindCourses']),
+      ...mapActions('course', ['bindCourses']),
       ...mapActions('courseregistration', ['bindRegisteredCourses', 'bindStudentCourses', 'addRegisteredCourse']),
       request (course) {
         const userId = this.user.uid;
@@ -64,20 +64,29 @@
         return false
       },
 
-      initialize (department) {
+      initializeDept (department) {
         if (department) {
           this.bindCourses(department.code)
+        }
+      },
+
+      initializeUser (user) {
+         if (user) {
           this.bindRegisteredCourses(this.user.uid)
           this.bindStudentCourses(this.user.uid)
         }
       }
     },
     created () {
-      this.initialize(this.userDepartment)
+      this.initializeDept(this.userDepartment)
+      this.initializeUser(this.user)
     },
     watch: {
       userDepartment (newVal, oldVal) {
-        this.initialize(newVal)
+        this.initializeDept(newVal)
+      },
+      user (newVal, oldVal) {
+        this.initializeUser(newVal)
       }
     },
     head: {
