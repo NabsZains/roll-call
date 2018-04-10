@@ -25,7 +25,8 @@
             ></v-text-field>
           </v-form>
           <v-card-actions>
-            <v-btn flat color="green" @click="request(attendance)">Update</v-btn>
+            <v-btn flat color="green" @click="plus(attendance)">+</v-btn>
+            <v-btn flat color="green" @click="minus(attendance)">-</v-btn>
           </v-card-actions>
         </v-card>
         <br>
@@ -64,6 +65,20 @@
             this.text = 'Attendance Updated'
             this.snackbar = true
           })
+      },
+
+      plus (attendance) {
+        this.request({
+          ...attendance,
+          attended: attendance.attended + 1
+        })
+      },
+
+      minus (attendance) {
+        this.request({
+          ...attendance,
+          attended: attendance.attended - 1
+        })
       },
 
       update (attendance) {
