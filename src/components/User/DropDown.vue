@@ -36,14 +36,6 @@
             <v-list-tile-title>Profile</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile>
-          <v-list-tile-action>
-            <v-icon>vpn_key</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Change Password</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
         <v-divider></v-divider>
         <v-list-tile @click="logout">
           <v-list-tile-action>
