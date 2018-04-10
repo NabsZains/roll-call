@@ -7,6 +7,22 @@
               <v-card-title primary-title>
                 <h3 class="headline">Profile</h3>
               </v-card-title>
+              <v-form v-if="userData">
+                <v-text-field
+                  label="Name"
+                  v-model="userData.name"
+                  required
+                ></v-text-field>
+                <v-text-field
+                  label="Enrolment Number"
+                  v-model="userData.enrolmentNumber"
+                ></v-text-field>
+                <v-btn
+                  @click="submit"
+                >
+                  submit
+                </v-btn>
+              </v-form>
               <!-- Department Section -->
               <v-alert type="info" :value="true" v-if="hasPendingDepartment">
                 Your choice of "{{ userData.pendingDepartment.name }}" Department is under review
@@ -29,7 +45,7 @@
                 </v-btn>
               </v-flex>
               <div v-if="hasDepartment">
-                Your Department is {{ userData.deparment.name }}
+                Your Department is {{ userData.department.name }}
               </div>
 
               <!-- Roles Section -->
@@ -90,7 +106,7 @@
       }
     },
     methods: {
-      ...mapActions('user', ['setDepartment', 'setRoles']),
+      ...mapActions('user', ['setDepartment', 'setRoles', 'saveUser']),
       saveDepartment() {
         const userId = this.userData.id;
         const departmentCode = this.selectedDepartment;
@@ -114,6 +130,14 @@
             // Show snackbar of error
             console.error(error);
           })
+      },
+      submit() {
+        this.saveUser(this.userData)
+          .then(() => {
+            console.log('Updated User')
+          }).catch(error => {
+            console.error(error);
+          });
       }
     },
     head: {

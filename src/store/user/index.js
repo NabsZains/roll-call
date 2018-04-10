@@ -20,6 +20,14 @@ export default {
           pending: true,
           pendingRoles: roles
         });
+    },
+    saveUser(_, { id, name, enrolmentNumber }) {
+      return db().collection('users')
+        .doc(id)
+        .update({
+          name,
+          enrolmentNumber
+        });
     }
   }
 }
