@@ -30,20 +30,23 @@ export default {
         return state.user.photoURL;
       return 'https://zhcet-web-amu.firebaseapp.com/static/img/account.svg';
     },
-    checkRole() {
+    checkRole(state) {
       return function (role) {
-        if (1== "1") return true
+        const userData = state.userData;
+        if (!userData || !userData.roles)
+          return false;
+
+        const roles = userData.roles;
+
         switch(role) {
           case "student":
-            return true;
+            return roles.includes("student");
           case "faculty":
-            return false;
-          case "office":
-            return false;
+            return roles.includes("faculty") || roles.includes("admin");
           case "admin":
-            return false;
+            return roles.includes("admin");
           default:
-            return false;
+            return true;
         }
       }
     }
