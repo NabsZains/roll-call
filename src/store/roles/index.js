@@ -29,6 +29,11 @@ export default {
         pending: false
       }
 
+      if (user.pendingDepartment) {
+        payload.department = db().collection('departments').doc(user.pendingDepartment.code)
+        payload.pendingDepartment = null
+      }
+
       return db()
         .collection('users')
         .doc(user.id)
